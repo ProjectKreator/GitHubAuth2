@@ -1,0 +1,51 @@
+<head>
+  <title>app</title>
+</head>
+
+<body>
+  {{> NavMenu}}
+</body>
+
+<template name="NavMenu">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-right">
+        {{> LoginMenu}}
+      </ul>
+    </div>
+  </nav>
+</template>
+
+<template name="LoginMenu">
+  {{#if currentUser}}
+    <li class="dropdown">
+      <a
+        href
+        class="dropdown-toggle"
+        data-toggle="dropdown">
+        {{currentUser.login}} <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="" data-action="logout">Logout</a>
+        </li>
+      </ul>
+    </li>
+  {{else}}
+    {{#if loggingIn }}
+      <li class="active">
+        <a href>
+          Logging In...
+        </a>
+      </li>
+    {{else}}
+      {{#if isLoginServicesConfigured}}
+        <li class="active">
+          <a href data-action="login">
+            Login with Github
+          </a>
+        </li>
+      {{/if}}
+    {{/if}}
+  {{/if}}
+</template>
